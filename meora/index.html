@@ -32,14 +32,11 @@
     font-weight: 700; font-size: 14px; padding: 10px 16px; letter-spacing: .3px;
   }
   img.full { display: block; width: 100%; height: auto; }
-  .trust {
-    display: flex; justify-content: space-around; gap: 8px;
-    padding: 14px 12px; background: #fff; border-bottom: 1px solid var(--border);
-    font-size: 12px; font-weight: 600; color: var(--green); text-align: center;
+  .slider {
+    display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 12px 16px; -webkit-overflow-scrolling: touch;
   }
-  .trust span { flex: 1; }
-  .trust [hidden] { display: none; }
-  .cta-wrap { padding: 16px; text-align: center; }
+  .slider img { flex: 0 0 78%; width: 78%; height: auto; scroll-snap-align: center; border-radius: 8px; }
   .btn {
     display: inline-block; width: 100%; border: 0; border-radius: 999px; cursor: pointer;
     background: var(--red); color: #fff; font-size: 17px; font-weight: 700;
@@ -95,21 +92,20 @@
 <body>
 <div class="wrap">
 
-  <div class="topbar" id="topbar">PROMO SPESIAL HARI INI – STOK TERBATAS!</div>
+  <div class="topbar" id="topbar">PROMO SPESIAL: DISKON 50% &amp; BISA COD SELURUH INDONESIA!</div>
 
-  <img class="full" src="img/01-hero.jpg" alt="Meora – Kekuatan Alami Papua, ekstrak Buah Merah">
-  <div class="trust">
-    <span data-cod hidden>✔ Bisa COD</span>
-    <span>✔ Terdaftar BPOM</span>
-    <span>✔ Produk Original</span>
-    <span>✔ Kirim ke Seluruh Indonesia</span>
-  </div>
-  <div class="cta-wrap"><a class="btn" href="#order">Dapatkan Kulit Sehatmu Sekarang</a></div>
-
+  <a href="#order"><img class="full" src="img/01-hero.jpg" alt="Meora – Kekuatan Alami Papua, ekstrak Buah Merah"></a>
   <img class="full" src="img/02-masalah.jpg" alt="Kenali masalah kulitmu" loading="lazy">
-  <img class="full" src="img/03-kandungan.jpg" alt="Kandungan alami dan manfaat Meora" loading="lazy">
+  <a href="#order"><img class="full" src="img/03-kandungan.jpg" alt="Kandungan alami dan manfaat Meora" loading="lazy"></a>
   <img class="full" src="img/04-bpom.jpg" alt="Produk terdaftar di BPOM" loading="lazy">
-  <img class="full" src="img/06-testimoni.jpg" alt="Apa kata pelanggan" loading="lazy">
+
+  <div class="slider" aria-label="Testimoni pelanggan">
+    <img src="img/08-wa-1.jpg" alt="Testimoni WhatsApp pelanggan" loading="lazy">
+    <img src="img/09-wa-2.jpg" alt="Testimoni WhatsApp pelanggan" loading="lazy">
+    <img src="img/08-wa-1.jpg" alt="Testimoni WhatsApp pelanggan" loading="lazy">
+    <img src="img/09-wa-2.jpg" alt="Testimoni WhatsApp pelanggan" loading="lazy">
+  </div>
+
   <img class="full" src="img/05-harga.jpg" alt="Harga spesial Meora" loading="lazy">
 
   <section id="order">
@@ -166,6 +162,7 @@
     </form>
   </section>
 
+  <img class="full" src="img/06-testimoni.jpg" alt="Apa kata pelanggan" loading="lazy">
   <img class="full" src="img/07-pengiriman.jpg" alt="Proses pengemasan dan pengiriman" loading="lazy">
 
   <footer>© Meora – Reseller Resmi</footer>
@@ -333,9 +330,6 @@
 
     var payments = store.paymentMethodOptions || [];
     renderPayments(payments);
-    var hasCod = payments.some(function (p) { return p.value === "cod"; });
-    document.querySelectorAll("[data-cod]").forEach(function (el) { el.hidden = !hasCod; });
-    if (hasCod) $("topbar").textContent = "PROMO SPESIAL – BISA COD SELURUH INDONESIA!";
 
     S.location.provinces().then(function (list) {
       fillSelect($("province"), list, "Pilih provinsi", "id", "name");
