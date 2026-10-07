@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meora Red Fruit – Kekuatan Alami Papua</title>
+<meta name="description" content="Meora Natural Glow Balm dengan ekstrak Buah Merah Papua. Terdaftar BPOM.">
+<meta name="theme-color" content="#b3191f">
+<style>
+  :root {
+    --red: #b3191f;
+    --red-dark: #8f1217;
+    --green: #2f4a2a;
+    --cream: #faf6ef;
+    --text: #2b2b2b;
+    --muted: #6b6b6b;
+    --border: #e4ddd2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #f2eee7;
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; background: var(--cream); padding-bottom: 88px; }
+  .topbar {
+    background: var(--red); color: #fff; text-align: center;
+    font-weight: 700; font-size: 14px; padding: 10px 16px; letter-spacing: .3px;
+  }
+  img.full { display: block; width: 100%; height: auto; }
+  .trust {
+    display: flex; justify-content: space-around; gap: 8px;
+    padding: 14px 12px; background: #fff; border-bottom: 1px solid var(--border);
+    font-size: 12px; font-weight: 600; color: var(--green); text-align: center;
+  }
+  .trust span { flex: 1; }
+  .trust [hidden] { display: none; }
+  .cta-wrap { padding: 16px; text-align: center; }
+  .btn {
+    display: inline-block; width: 100%; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--red); color: #fff; font-size: 17px; font-weight: 700;
+    padding: 15px 20px; text-decoration: none; box-shadow: 0 4px 0 var(--red-dark);
+  }
+  .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--red-dark); }
+  .btn[disabled] { opacity: .6; cursor: wait; }
+
+  /* Order form */
+  #order { padding: 8px 16px 24px; }
+  .form-head { display: block; width: 100%; height: auto; margin: 8px 0 12px; }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .price-line { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+  .price-now { font-size: 26px; font-weight: 800; color: var(--red); }
+  .product-name { font-weight: 700; margin: 0 0 4px; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
+  input, select, textarea {
+    width: 100%; font: inherit; font-size: 16px; padding: 11px 12px;
+    border: 1px solid #cfc7ba; border-radius: 8px; background: #fff; color: var(--text);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  .qty { display: flex; align-items: center; gap: 10px; }
+  .qty button {
+    width: 40px; height: 40px; border-radius: 8px; border: 1px solid #cfc7ba;
+    background: #fff; font-size: 20px; cursor: pointer;
+  }
+  .qty input { width: 64px; text-align: center; }
+  .options { display: grid; gap: 8px; }
+  .opt {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid #cfc7ba; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; margin: 0;
+  }
+  .opt input { width: auto; margin: 0; }
+  .opt img { height: 20px; width: auto; }
+  .opt .grow { flex: 1; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .summary { margin-top: 16px; border-top: 1px dashed var(--border); padding-top: 12px; font-size: 14px; }
+  .summary div { display: flex; justify-content: space-between; padding: 3px 0; }
+  .summary .total { font-weight: 800; font-size: 17px; color: var(--red); }
+  .error { color: #b00020; font-size: 14px; margin-top: 10px; }
+  .submit { margin-top: 18px; }
+
+  .sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(250, 246, 239, .96); border-top: 1px solid var(--border);
+  }
+  .sticky .btn { max-width: 448px; display: block; margin: 0 auto; text-align: center; }
+  .sticky.hide { display: none; }
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar" id="topbar">PROMO SPESIAL HARI INI – STOK TERBATAS!</div>
+
+  <img class="full" src="img/01-hero.jpg" alt="Meora – Kekuatan Alami Papua, ekstrak Buah Merah">
+  <div class="trust">
+    <span data-cod hidden>✔ Bisa COD</span>
+    <span>✔ Terdaftar BPOM</span>
+    <span>✔ Produk Original</span>
+    <span>✔ Kirim ke Seluruh Indonesia</span>
+  </div>
+  <div class="cta-wrap"><a class="btn" href="#order">Dapatkan Kulit Sehatmu Sekarang</a></div>
+
+  <img class="full" src="img/02-masalah.jpg" alt="Kenali masalah kulitmu" loading="lazy">
+  <img class="full" src="img/03-kandungan.jpg" alt="Kandungan alami dan manfaat Meora" loading="lazy">
+  <img class="full" src="img/04-bpom.jpg" alt="Produk terdaftar di BPOM" loading="lazy">
+  <img class="full" src="img/06-testimoni.jpg" alt="Apa kata pelanggan" loading="lazy">
+  <img class="full" src="img/05-harga.jpg" alt="Harga spesial Meora" loading="lazy">
+
+  <section id="order">
+    <img class="form-head" src="img/00-isi-form.png" alt="Isi form di bawah ini untuk pemesanan" loading="lazy">
+
+    <form class="card" id="orderForm" novalidate>
+      <p class="product-name" id="productName">Meora Natural Glow Balm</p>
+      <div class="price-line"><span class="price-now" id="unitPrice">Rp99.000</span></div>
+
+      <label for="qty">Jumlah</label>
+      <div class="qty">
+        <button type="button" data-step="-1" aria-label="Kurangi">−</button>
+        <input id="qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric">
+        <button type="button" data-step="1" aria-label="Tambah">+</button>
+      </div>
+
+      <label for="customerName">Nama Lengkap</label>
+      <input id="customerName" name="customerName" autocomplete="name" required placeholder="Nama Anda">
+
+      <label for="customerPhone">No. WhatsApp</label>
+      <input id="customerPhone" name="customerPhone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="08xxxxxxxxxx">
+
+      <label for="province">Provinsi</label>
+      <select id="province" required><option value="">Memuat…</option></select>
+
+      <label for="city">Kota / Kabupaten</label>
+      <select id="city" required disabled><option value="">Pilih provinsi dulu</option></select>
+
+      <label for="subdistrict">Kecamatan</label>
+      <select id="subdistrict" required disabled><option value="">Pilih kota dulu</option></select>
+
+      <label for="postalCode">Kode Pos</label>
+      <select id="postalCode" disabled><option value="">Pilih kecamatan dulu</option></select>
+
+      <label for="address">Alamat Lengkap</label>
+      <textarea id="address" name="address" autocomplete="street-address" required placeholder="Nama jalan, nomor rumah, RT/RW, patokan"></textarea>
+
+      <label>Metode Pembayaran</label>
+      <div class="options" id="paymentOptions"><div class="hint">Memuat metode pembayaran…</div></div>
+
+      <label>Pengiriman</label>
+      <div class="options" id="shippingOptions"><div class="hint">Lengkapi alamat untuk melihat ongkir.</div></div>
+
+      <div class="summary" id="summary" hidden>
+        <div><span>Harga produk</span><span id="sumProduct">-</span></div>
+        <div><span>Ongkos kirim</span><span id="sumShipping">-</span></div>
+        <div id="rowOther" hidden><span id="sumOtherName">Biaya lain</span><span id="sumOther">-</span></div>
+        <div id="rowService" hidden><span>Biaya layanan</span><span id="sumService">-</span></div>
+        <div class="total"><span>Total</span><span id="sumTotal">-</span></div>
+      </div>
+
+      <div class="error" id="formError" role="alert" hidden></div>
+      <button class="btn submit" type="submit" id="submitBtn">Beli Sekarang</button>
+    </form>
+  </section>
+
+  <img class="full" src="img/07-pengiriman.jpg" alt="Proses pengemasan dan pengiriman" loading="lazy">
+
+  <footer>© Meora – Reseller Resmi</footer>
+</div>
+
+<div class="sticky" id="sticky"><a class="btn" href="#order">Pesan Sekarang – Rp99.000</a></div>
+
+<script>
+(function () {
+  var rupiah = function (n) { return "Rp" + Math.round(Number(n) || 0).toLocaleString("id-ID"); };
+  var $ = function (id) { return document.getElementById(id); };
+
+  var state = { variant: null, payment: null, shipping: null, shippingList: [] };
+
+  // Hide the sticky CTA while the order form is on screen.
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      $("sticky").classList.toggle("hide", entries[0].isIntersecting);
+    }).observe($("order"));
+  }
+
+  document.querySelectorAll(".qty button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var q = $("qty");
+      q.value = Math.min(20, Math.max(1, (parseInt(q.value, 10) || 1) + Number(b.dataset.step)));
+      onCartChange();
+    });
+  });
+  $("qty").addEventListener("change", onCartChange);
+
+  function showError(msg) {
+    var e = $("formError");
+    e.textContent = msg || "";
+    e.hidden = !msg;
+  }
+
+  function fillSelect(sel, list, placeholder, valueKey, labelKey) {
+    sel.innerHTML = "";
+    var o = document.createElement("option");
+    o.value = ""; o.textContent = placeholder; sel.appendChild(o);
+    list.forEach(function (it) {
+      var op = document.createElement("option");
+      op.value = it[valueKey]; op.textContent = it[labelKey];
+      sel.appendChild(op);
+    });
+    sel.disabled = false;
+  }
+
+  function qty() { return Math.max(1, parseInt($("qty").value, 10) || 1); }
+
+  function items() {
+    return [{ type: "product", variantUniqueId: state.variant.uniqueId, quantity: qty() }];
+  }
+
+  function destination() {
+    return {
+      subdistrictId: Number($("subdistrict").value) || undefined,
+      postalCode: $("postalCode").value || undefined
+    };
+  }
+
+  function renderPayments(options) {
+    var box = $("paymentOptions");
+    box.innerHTML = "";
+    options.forEach(function (p, i) {
+      var l = document.createElement("label");
+      l.className = "opt";
+      l.innerHTML = '<input type="radio" name="payment"><span class="grow"></span>';
+      l.querySelector(".grow").textContent = p.display;
+      if (p.logoUrl) { var img = document.createElement("img"); img.src = p.logoUrl; img.alt = ""; l.appendChild(img); }
+      var r = l.querySelector("input");
+      r.value = p.value;
+      if (i === 0) { r.checked = true; state.payment = p.value; }
+      r.addEventListener("change", function () { state.payment = p.value; loadShipping(); });
+      box.appendChild(l);
+    });
+  }
+
+  function renderShipping(list) {
+    var box = $("shippingOptions");
+    box.innerHTML = "";
+    state.shippingList = list;
+    state.shipping = null;
+    if (!list.length) {
+      box.innerHTML = '<div class="hint">Tidak ada layanan pengiriman untuk alamat/metode ini.</div>';
+      updateSummary();
+      return;
+    }
+    list.forEach(function (s, i) {
+      var l = document.createElement("label");
+      l.className = "opt";
+      l.innerHTML = '<input type="radio" name="shipping"><span class="grow"></span><strong></strong>';
+      l.querySelector(".grow").textContent = (s.courierCode || "").toUpperCase() + " " + (s.name || "") + (s.etd ? " (" + s.etd + " hari)" : "");
+      l.querySelector("strong").textContent = rupiah(s.cost);
+      var r = l.querySelector("input");
+      if (i === 0) { r.checked = true; state.shipping = s; }
+      r.addEventListener("change", function () { state.shipping = s; updateSummary(); });
+      box.appendChild(l);
+    });
+    updateSummary();
+  }
+
+  var shippingSeq = 0;
+  function loadShipping() {
+    if (!window.Scalev || !state.variant || !state.payment) return;
+    var d = destination();
+    if (!d.subdistrictId) return;
+    var seq = ++shippingSeq;
+    $("shippingOptions").innerHTML = '<div class="hint">Menghitung ongkir…</div>';
+    Scalev.checkout.shippingOptions({ paymentMethod: state.payment, destination: d, items: items() })
+      .then(function (list) { if (seq === shippingSeq) renderShipping(list || []); })
+      .catch(function (err) {
+        if (seq !== shippingSeq) return;
+        $("shippingOptions").innerHTML = '<div class="hint">Gagal memuat ongkir. Coba lagi.</div>';
+        console.warn(err);
+      });
+  }
+
+  var summarySeq = 0;
+  function updateSummary() {
+    if (!state.shipping) { $("summary").hidden = true; return; }
+    var seq = ++summarySeq;
+    Scalev.checkout.estimateSummary({
+      destination: destination(), items: items(), paymentMethod: state.payment, shipping: state.shipping
+    }).then(function (s) {
+      if (seq !== summarySeq) return;
+      $("sumProduct").textContent = rupiah(s.productPrice);
+      $("sumShipping").textContent = rupiah(s.shippingCost);
+      $("rowOther").hidden = !Number(s.otherIncome);
+      $("sumOtherName").textContent = s.otherIncomeName || "Biaya lain";
+      $("sumOther").textContent = rupiah(s.otherIncome);
+      $("rowService").hidden = !Number(s.serviceFee);
+      $("sumService").textContent = rupiah(s.serviceFee);
+      $("sumTotal").textContent = rupiah(s.grossRevenue);
+      $("summary").hidden = false;
+    }).catch(function (err) { console.warn(err); });
+  }
+
+  function onCartChange() {
+    if (state.variant) {
+      $("sticky").querySelector(".btn").textContent = "Pesan Sekarang – " + rupiah(state.variant.price);
+    }
+    loadShipping();
+  }
+
+  function init() {
+    var S = window.Scalev;
+    if (!S) { showError("Form pemesanan sedang dimuat. Silakan muat ulang halaman."); return; }
+    var data = S.data.get() || {};
+    var store = data.store;
+    var product = store && store.products && store.products[0];
+    state.variant = product && product.variants && product.variants[0];
+    if (!state.variant) { showError("Produk belum tersedia. Hubungi admin."); return; }
+
+    $("productName").textContent = product.name;
+    $("unitPrice").textContent = rupiah(state.variant.price);
+    onCartChange();
+
+    var payments = store.paymentMethodOptions || [];
+    renderPayments(payments);
+    var hasCod = payments.some(function (p) { return p.value === "cod"; });
+    document.querySelectorAll("[data-cod]").forEach(function (el) { el.hidden = !hasCod; });
+    if (hasCod) $("topbar").textContent = "PROMO SPESIAL – BISA COD SELURUH INDONESIA!";
+
+    S.location.provinces().then(function (list) {
+      fillSelect($("province"), list, "Pilih provinsi", "id", "name");
+    });
+    $("province").addEventListener("change", function () {
+      $("city").disabled = $("subdistrict").disabled = $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.cities(this.value).then(function (list) {
+        fillSelect($("city"), list, "Pilih kota/kabupaten", "id", "name");
+      });
+    });
+    $("city").addEventListener("change", function () {
+      $("subdistrict").disabled = $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.subdistricts(this.value).then(function (list) {
+        fillSelect($("subdistrict"), list, "Pilih kecamatan", "id", "name");
+      });
+    });
+    $("subdistrict").addEventListener("change", function () {
+      $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.postalCodes(this.value).then(function (list) {
+        fillSelect($("postalCode"), list, "Pilih kode pos", "postalCode", "postalCode");
+        if (list.length === 1) $("postalCode").value = list[0].postalCode;
+        loadShipping();
+      });
+    });
+    $("postalCode").addEventListener("change", loadShipping);
+
+    S.prefill.get().then(function (p) {
+      if (!p) return;
+      if (p.customer) {
+        if (p.customer.name) $("customerName").value = p.customer.name;
+        if (p.customer.phone) $("customerPhone").value = p.customer.phone;
+      }
+      if (p.destination && p.destination.address) $("address").value = p.destination.address;
+    }).catch(function () {});
+
+    var submitting = false;
+    $("orderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (submitting) return;
+      showError("");
+      var name = $("customerName").value.trim();
+      var phone = $("customerPhone").value.replace(/[^0-9+]/g, "");
+      var address = $("address").value.trim();
+      if (!name) return showError("Nama wajib diisi.");
+      if (phone.length < 9) return showError("Nomor WhatsApp belum benar.");
+      if (!$("subdistrict").value) return showError("Pilih provinsi, kota, dan kecamatan.");
+      if (!address) return showError("Alamat lengkap wajib diisi.");
+      if (!state.payment) return showError("Pilih metode pembayaran.");
+      if (!state.shipping) return showError("Pilih layanan pengiriman.");
+
+      submitting = true;
+      var btn = $("submitBtn");
+      btn.disabled = true; btn.textContent = "Memproses…";
+
+      var payload = {
+        customer: { name: name, phone: phone },
+        destination: Object.assign({ address: address }, destination()),
+        items: items(),
+        paymentMethod: state.payment,
+        shipping: state.shipping
+      };
+
+      S.prefill.save({ customer: payload.customer, destination: payload.destination }, { source: "checkout_form" }).catch(function () {});
+
+      S.checkout.createOrder(payload).then(function (order) {
+        var target = order && typeof order.redirectUrl === "string" ? order.redirectUrl.trim() : "";
+        if (target) {
+          if (window.self !== window.top) window.parent.postMessage(target, "*");
+          else window.location.assign(target);
+          return;
+        }
+        btn.textContent = "Pesanan diterima ✔";
+        showError("");
+        var f = $("formError");
+        f.hidden = false; f.style.color = "var(--green)";
+        f.textContent = "Pesanan berhasil dibuat. Admin kami akan menghubungi Anda via WhatsApp.";
+        if (order && order.publicOrderUrl) {
+          var a = document.createElement("a"); a.href = order.publicOrderUrl; a.textContent = " Lihat pesanan";
+          f.appendChild(a);
+        }
+      }).catch(function (err) {
+        submitting = false;
+        btn.disabled = false; btn.textContent = "Beli Sekarang";
+        showError((err && err.message) || "Pesanan gagal dibuat. Silakan coba lagi.");
+      });
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+</body>
+</html>
