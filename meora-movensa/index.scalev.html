@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meora Natural Glow Balm</title>
+<meta name="description" content="Meora balm dengan ekstrak Buah Merah Papua.">
+<meta name="theme-color" content="#a3382a">
+<style>
+  :root {
+    --red: #a3382a;
+    --red-dark: #7d2a1f;
+    --purple-soft: #f3eefa;
+    --orange: #ee4d2d;
+    --green: #1f8a4c;
+    --text: #222;
+    --muted: #777;
+    --border: #ececec;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: #f0f0f0; color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px; line-height: 1.5;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; background: #fff; padding-bottom: 76px; }
+  .search { position: sticky; top: 0; z-index: 9; display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #fff; border-bottom: 1px solid var(--border); }
+  .search .box { flex: 1; display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 13px; color: #999; }
+  .search a { color: #444; text-decoration: none; font-size: 20px; line-height: 1; }
+  .gallery { position: relative; }
+  .slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .slides::-webkit-scrollbar { display: none; }
+  .slides img { flex: 0 0 100%; width: 100%; aspect-ratio: 1; object-fit: cover; scroll-snap-align: center; display: block; }
+  .count { position: absolute; right: 10px; bottom: 10px; background: rgba(0,0,0,.45); color: #fff; font-size: 12px; padding: 2px 8px; border-radius: 10px; }
+  .thumbs { display: flex; gap: 6px; padding: 8px 10px; overflow-x: auto; scrollbar-width: none; }
+  .thumbs button { flex: 0 0 52px; height: 52px; padding: 0; border: 2px solid transparent; border-radius: 4px; background: none; cursor: pointer; }
+  .thumbs button.on { border-color: var(--orange); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; display: block; }
+  .pricebar { display: grid; grid-template-columns: 82px 1fr 92px; align-items: center; background: linear-gradient(90deg, #ee4d2d, #ff7337); color: #fff; }
+  .pricebar .promo { font-size: 11px; font-weight: 800; line-height: 1.2; padding: 10px; }
+  .pricebar .mid { background: #fff5f1; color: var(--orange); padding: 8px 10px; }
+  .pricebar .mid s { color: #999; font-size: 12px; }
+  .pricebar .mid .now { font-size: 22px; font-weight: 800; }
+  .pricebar .mid .save { font-size: 11px; font-weight: 700; }
+  .pricebar .stock { text-align: center; font-size: 11px; font-weight: 800; line-height: 1.25; padding: 8px 6px; }
+  .pricebar .stock b { display: block; font-size: 12px; }
+  .info { padding: 12px 14px; border-bottom: 8px solid #f5f5f5; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .badge { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 2px; }
+  .badge.off { background: var(--red); color: #fff; }
+  .badge.cod { background: #fff4e5; color: #d46b08; border: 1px solid #ffd591; }
+  h1 { font-size: 16px; font-weight: 600; line-height: 1.4; margin: 0 0 8px; }
+  .meta { font-size: 13px; color: #555; }
+  .meta b { color: var(--orange); }
+  .meta i { font-style: normal; color: #ddd; margin: 0 8px; }
+  .voucher { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 8px solid #f5f5f5; font-size: 12px; }
+  .voucher .v { border: 1px dashed var(--orange); color: var(--orange); padding: 2px 6px; border-radius: 3px; font-weight: 700; }
+  .voucher .v.green { border-color: #00bfa5; color: #00a08a; }
+  .voucher a { margin-left: auto; color: var(--orange); font-weight: 800; text-decoration: none; }
+  .assure { padding: 6px 14px; border-bottom: 8px solid #f5f5f5; }
+  .assure div { display: flex; gap: 10px; padding: 8px 0; font-size: 13px; }
+  .assure div + div { border-top: 1px solid var(--border); }
+  .assure b { display: block; font-size: 14px; }
+  .assure span { color: var(--muted); }
+  .store { padding: 12px 14px; border-bottom: 8px solid #f5f5f5; }
+  .store .row { display: flex; align-items: center; gap: 10px; }
+  .store img { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border); }
+  .store .name { flex: 1; font-size: 14px; }
+  .store .name b { display: block; }
+  .store .name small { display: block; color: var(--muted); font-size: 11px; }
+  .store .name em { color: #26aa99; font-style: normal; font-size: 11px; }
+  .store a.visit { border: 1px solid var(--red); color: var(--red); font-size: 11px; font-weight: 700; padding: 5px 8px; border-radius: 3px; text-decoration: none; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; margin-top: 12px; }
+  .stats b { display: block; color: var(--red); font-size: 15px; }
+  .stats span { font-size: 11px; color: var(--muted); }
+  .desc { padding: 18px 16px; text-align: center; border-bottom: 1px solid var(--border); }
+  .desc h2 { color: var(--red); font-size: 16px; letter-spacing: .4px; margin: 0 0 4px; }
+  .desc .sub { font-weight: 700; margin: 0 0 10px; }
+  .desc p { color: #555; font-size: 14px; margin: 0; }
+  .block { padding: 18px 16px; border-bottom: 1px solid var(--border); }
+  .block h3 { font-size: 14px; letter-spacing: .4px; margin: 0 0 14px; }
+  .block h3.center, .center { text-align: center; }
+  .check { display: flex; gap: 10px; margin-bottom: 14px; }
+  .check .ok { flex: 0 0 22px; height: 22px; border-radius: 4px; background: #25a244; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .check b { display: block; font-size: 14px; }
+  .check span { font-size: 13px; color: #666; }
+  .formula { text-align: center; padding: 18px 16px 6px; }
+  .formula h3 { color: var(--red); font-size: 15px; letter-spacing: .4px; margin: 0 0 4px; }
+  .formula p { font-size: 13px; color: #666; margin: 0; }
+  img.full { display: block; width: 100%; height: auto; }
+  .ing { margin-bottom: 12px; }
+  .ing b { display: block; font-size: 14px; }
+  .ing b::before { content: "✔ "; color: var(--red); }
+  .ing span { display: block; font-size: 13px; color: #666; padding-left: 18px; }
+  .eyebrow { font-size: 11px; letter-spacing: 1.5px; color: #999; text-transform: uppercase; text-align: center; margin: 0 0 6px; }
+  .big { text-align: center; font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  .lead { text-align: center; color: #666; font-size: 13px; margin: 0 0 14px; }
+  .benefit { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; font-size: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .benefit::before { content: "🔹 "; }
+  ol.steps { margin: 0; padding-left: 20px; color: #555; font-size: 14px; }
+  ol.steps li { margin-bottom: 8px; }
+  .detail { display: grid; grid-template-columns: 1fr 1fr; text-align: center; border: 1px solid var(--border); border-radius: 8px; margin-top: 10px; }
+  .detail div { padding: 10px; }
+  .detail div + div { border-left: 1px solid var(--border); }
+  .detail span { display: block; font-size: 12px; color: var(--muted); }
+  .warn { margin: 14px 0 0; font-size: 12px; color: #a33; background: #fff6f6; border: 1px solid #f3d0d0; border-radius: 6px; padding: 10px 12px; text-align: center; }
+  .reviews-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .reviews-head a { color: var(--orange); font-size: 13px; text-decoration: none; }
+  .review { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .review .who { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .review .av { width: 26px; height: 26px; border-radius: 50%; background: #eee; color: #666; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .review .when { margin-left: auto; color: #aaa; font-size: 11px; }
+  .review .stars { color: #ffb400; font-size: 13px; margin: 6px 0 4px; letter-spacing: 1px; }
+  .review p { margin: 0; font-size: 14px; color: #333; }
+  .review img { width: 72px; height: 72px; object-fit: cover; border-radius: 4px; margin-top: 8px; display: block; }
+  #order h2 { font-size: 17px; margin: 0 0 4px; }
+  #order > p { color: #666; font-size: 13px; margin: 0 0 12px; }
+  .btn {
+    display: inline-block; width: 100%; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--red); color: #fff; font-size: 17px; font-weight: 700;
+    padding: 15px 20px; text-decoration: none; box-shadow: 0 4px 0 var(--red-dark);
+  }
+  .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--red-dark); }
+  .btn[disabled] { opacity: .6; cursor: wait; }
+
+  /* Order form */
+  #order { padding: 8px 16px 24px; }
+  .form-head { display: block; width: 100%; height: auto; margin: 8px 0 12px; }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .price-line { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+  .price-now { font-size: 26px; font-weight: 800; color: var(--red); }
+  .product-name { font-weight: 700; margin: 0 0 4px; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
+  input, select, textarea {
+    width: 100%; font: inherit; font-size: 16px; padding: 11px 12px;
+    border: 1px solid #cfc7ba; border-radius: 8px; background: #fff; color: var(--text);
+  }
+  textarea { min-height: 80px; resize: vertical; }
+  .qty { display: flex; align-items: center; gap: 10px; }
+  .qty button {
+    width: 40px; height: 40px; border-radius: 8px; border: 1px solid #cfc7ba;
+    background: #fff; font-size: 20px; cursor: pointer;
+  }
+  .qty input { width: 64px; text-align: center; }
+  .options { display: grid; gap: 8px; }
+  .opt {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid #cfc7ba; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; margin: 0;
+  }
+  .opt input { width: auto; margin: 0; }
+  .opt img { height: 20px; width: auto; }
+  .opt .grow { flex: 1; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .summary { margin-top: 16px; border-top: 1px dashed var(--border); padding-top: 12px; font-size: 14px; }
+  .summary div { display: flex; justify-content: space-between; padding: 3px 0; }
+  .summary .total { font-weight: 800; font-size: 17px; color: var(--red); }
+  .error { color: #b00020; font-size: 14px; margin-top: 10px; }
+  .submit { margin-top: 18px; }
+
+  .sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(250, 246, 239, .96); border-top: 1px solid var(--border);
+  }
+  .sticky .btn { max-width: 448px; display: block; margin: 0 auto; text-align: center; }
+  .sticky.hide { display: none; }
+  .sticky { padding: 6px 10px calc(6px + env(safe-area-inset-bottom)); background: #fff; display: flex; gap: 6px; align-items: center; max-width: 480px; margin: 0 auto; border-top: 1px solid var(--border); }
+  .sticky.hide { display: none; }
+  .sticky .ico { flex: 0 0 52px; text-align: center; font-size: 10px; color: #555; text-decoration: none; line-height: 1.2; }
+  .sticky .ico span { display: block; font-size: 20px; }
+  .sticky .btn { border-radius: 4px; box-shadow: none; background: var(--orange); font-size: 15px; padding: 13px 10px; }
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 16px; }
+  footer b { display: block; color: #444; }
+  .store .logo { flex: 0 0 48px; height: 48px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font: 700 22px Georgia, serif; }
+  .review .pic { width: 26px; height: 26px; margin: 0; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="search"><a href="#" aria-label="Kembali">‹</a><div class="box">🔍 Cari di MEORA Natural Glow Balm...</div><a href="#order" aria-label="Keranjang">🛒</a></div>
+
+  <div class="gallery">
+    <div class="slides" id="slides">
+      <img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/01-hero.jpg" alt="Meora – bekas luka menonjol seperti keloid">
+      <img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/02-10x.jpg" alt="10x lebih efektif ratakan keloid dan bekas luka" loading="lazy">
+      <img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/03-tumpas.jpg" alt="Tumpas bekas luka sampai ke akarnya, 3 kandungan alami" loading="lazy">
+      <img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/04-offer.jpg" alt="Kekuatan alami Papua, diskon 50%, COD available" loading="lazy">
+      <img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-2/img/06-promo.jpg" alt="Promo hari ini diskon 50%, Rp99 ribu" loading="lazy">
+    </div>
+    <div class="count" id="count">1/5</div>
+  </div>
+  <div class="thumbs" id="thumbs">
+      <button type="button" data-i="0" class="on"><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/01-hero.jpg" alt="" loading="lazy"></button>
+      <button type="button" data-i="1"><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/02-10x.jpg" alt="" loading="lazy"></button>
+      <button type="button" data-i="2"><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/03-tumpas.jpg" alt="" loading="lazy"></button>
+      <button type="button" data-i="3"><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/04-offer.jpg" alt="" loading="lazy"></button>
+      <button type="button" data-i="4"><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-2/img/06-promo.jpg" alt="" loading="lazy"></button>
+  </div>
+
+  <div class="pricebar">
+    <div class="promo">PROMO SPESIAL HARI INI</div>
+    <div class="mid">
+      <div><s>🔥 Harga Normal Rp200.000</s></div>
+      <div>🔥 Harga Promo</div>
+      <div><span class="now">Rp99.000</span> <span class="save">🎁 Diskon 50%</span></div>
+    </div>
+    <div class="stock">📦 STOK PROMO TERBATAS<b>Sisa 12 Jar Lagi</b></div>
+  </div>
+
+  <div class="info">
+    <div class="badges"><span class="badge off">RESELLER RESMI</span><span class="badge cod">🚚 Bisa Bayar di Tempat (COD)</span></div>
+    <h1>[ORIGINAL] Meora Body Brightening &amp; Natural Glow Balm – Ekstrak Buah Merah Papua untuk Kulit Lembap, Cerah &amp; Bekas Luka | BPOM</h1>
+    <div class="meta"><b>4.9 ★</b><i>|</i>Rating Kepuasan<i>|</i>10rb+ Wanita Terbantu</div>
+  </div>
+
+  <div class="voucher">PROMO: <span class="v">Diskon 50%</span><span class="v green">Bisa COD</span><a href="#order">AMBIL PROMO</a></div>
+
+  <div class="assure">
+    <div>💵<p style="margin:0"><b>Bisa Bayar di Tempat (COD)</b><span>Sangat aman. Cukup bayar tunai ke kurir saat produk sampai di tangan Anda.</span></p></div>
+    <div>📦<p style="margin:0"><b>Dikirim ke Seluruh Indonesia</b><span>Paket dikirim langsung ke alamat rumah Anda.</span></p></div>
+  </div>
+
+  <div class="store" id="toko">
+    <div class="row">
+      <div class="logo">M</div>
+      <div class="name"><b>MEORA – Reseller Resmi</b><em>Online</em><small>Balm Buah Merah Papua · Terdaftar BPOM</small></div>
+      <a class="visit" href="#order">PESAN SEKARANG</a>
+    </div>
+    <div class="stats">
+      <div><b>100%</b><span>Bahan Natural</span></div>
+      <div><b>4.9</b><span>Rating Kepuasan</span></div>
+      <div><b>BPOM</b><span>Terdaftar Resmi</span></div>
+    </div>
+  </div>
+
+  <div class="desc">
+    <h2>MEORA NATURAL GLOW BALM</h2>
+    <p class="sub">Kekuatan alami Papua untuk kulit sehat, lembap, dan bercahaya!</p>
+    <p>Rahasia kecantikan eksotis dengan ekstrak Buah Merah murni. Diperkaya minyak kelapa dara dan ekstrak tumbuhan herbal untuk merawat kulit kering, kusam, noda hitam, hingga area bekas luka.</p>
+  </div>
+
+  <div class="block">
+    <h3>KEUNGGULAN MEORA NATURAL GLOW BALM</h3>
+    <div class="check"><div class="ok">✓</div><div><b>Hidrasi Mendalam</b><span>Melembapkan kulit secara intensif dan tahan lama. Selamat tinggal kulit kering.</span></div></div>
+    <div class="check"><div class="ok">✓</div><div><b>Mencerahkan &amp; Meratakan</b><span>Membantu mengurangi noda hitam dan mencerahkan kulit kusam secara bertahap.</span></div></div>
+    <div class="check"><div class="ok">✓</div><div><b>Perlindungan Antioksidan</b><span>Melindungi sel kulit dari kerusakan akibat radikal bebas dan polusi lingkungan.</span></div></div>
+    <div class="check"><div class="ok">✓</div><div><b>Menutrisi &amp; Meregenerasi</b><span>Memelihara kesehatan kulit secara menyeluruh dan membantu proses peremajaan sel.</span></div></div>
+  </div>
+
+  <div class="formula">
+    <h3>FORMULA PILIHAN &amp; MANFAAT NYATA</h3>
+    <p>Diperkaya dengan Buah Merah asli Papua</p>
+  </div>
+  <div style="padding:14px 0 0">
+    <img class="full" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora/img/02-masalah.jpg" alt="Apakah Anda mengalami ini?" loading="lazy">
+    <img class="full" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora/img/03-kandungan.jpg" alt="Kandungan alami dan manfaatnya" loading="lazy">
+    <img class="full" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-2/img/03-10x.jpg" alt="10x lebih efektif ratakan keloid dan bekas luka" loading="lazy">
+    <img class="full" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora/img/04-bpom.jpg" alt="Produk Meora sudah terdaftar di BPOM" loading="lazy">
+    <img class="full" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora/img/07-pengiriman.jpg" alt="Testimoni pengiriman barang" loading="lazy">
+  </div>
+
+  <div class="block">
+    <h3>KOMPOSISI UTAMA (INGREDIENTS):</h3>
+    <div class="ing"><b>Ekstrak Buah Merah</b><span>Antioksidan &amp; Vitamin E. Kaya akan tokoferol dan betakaroten yang membantu menangkal radikal bebas dan mendukung regenerasi sel kulit.</span></div>
+    <div class="ing"><b>Minyak Kelapa Dara</b><span>Pelembap alami intensif. Mengunci kelembapan kulit, merawat <i>skin barrier</i>, dan membuat tekstur kulit halus dan kenyal.</span></div>
+    <div class="ing"><b>Ekstrak Tumbuhan Herbal</b><span>Menenangkan &amp; menyegarkan. Membantu menenangkan kulit kemerahan dan memberikan sensasi segar sepanjang hari.</span></div>
+  </div>
+
+  <div class="block">
+    <p class="eyebrow">MANFAAT PRODUK</p>
+    <p class="big">Kembalikan Pesona Alami Kulitmu</p>
+    <p class="lead">Rawat kulit dan area bekas luka dengan bahan alami</p>
+    <div class="benefit">Membantu merawat kulit pada area bekas luka menonjol.</div>
+    <div class="benefit">Membantu menjaga kelembapan area keloid.</div>
+    <div class="benefit">Membantu membuat kulit terasa lebih halus &amp; lembut.</div>
+    <div class="benefit">Membantu merawat tekstur kulit yang tidak rata.</div>
+    <div class="benefit">Membantu menjaga elastisitas kulit di area bekas luka.</div>
+  </div>
+
+  <div class="block">
+    <p class="eyebrow">PANDUAN &amp; DETAIL</p>
+    <p class="big" style="font-size:16px;color:var(--red)">Cara Penggunaan</p>
+    <ol class="steps">
+      <li>Bersihkan dan keringkan area kulit yang akan dirawat.</li>
+      <li>Oleskan balm tipis-tipis secara merata.</li>
+      <li>Gunakan rutin setiap hari, pagi dan malam.</li>
+    </ol>
+    <p class="big" style="font-size:16px;color:var(--red);margin-top:14px">Detail Produk</p>
+    <div class="detail"><div><span>Netto</span><b>30 gram</b></div><div><span>Kemasan</span><b>Jar (Balm)</b></div></div>
+    <p class="warn">Untuk kulit sensitif, oleskan sedikit di lengan bagian dalam dan tunggu 24 jam sebelum dipakai di area yang lebih luas.</p>
+  </div>
+
+  <div class="block">
+    <div class="reviews-head"><h3 style="margin:0">ULASAN PENGGUNA PILIHAN</h3><a href="#order">Lihat Semua</a></div>
+    <div class="review"><div class="who"><img class="pic" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/av-arini.jpg" alt="">Arini Putri<span class="when">Karyawan, 32 Tahun</span></div><div class="stars">★★★★★</div><p>"Awalnya udah pasrah banget sama kulit wajah yang kusam dan banyak flek hitam. Pas coba telaten pakai krim Meora ini tiap malam, tekstur kulit perlahan jadi kenyal dan cerah. Flek juga makin pudar merata sama warna kulit asli. Hasilnya bener-bener nyata!"</p><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/wa-ayu.jpg" alt="Testimoni WhatsApp" loading="lazy"></div>
+    <div class="review"><div class="who"><img class="pic" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/av-diana.jpg" alt="">Diana S.<span class="when">Ibu Rumah Tangga, 28 Tahun</span></div><div class="stars">★★★★★</div><p>"Sumpah bagus banget produk ini! Kulitku yang tadinya super kering sampai bersisik, sekarang udah jauh lebih lembap dan glowing setelah rutin pakai. Teksturnya nyaman banget di kulit, nggak lengket, dan cepet meresap."</p><img src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/wa-diana.jpg" alt="Testimoni WhatsApp" loading="lazy"></div>
+    <div class="review"><div class="who"><img class="pic" src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@fa4aa6371f4d44b87bf78d041f94697cc87f43c8/meora-fa1/img/av-nita.jpg" alt="">Nita Maharani<span class="when">Wiraswasta, 35 Tahun</span></div><div class="stars">★★★★★</div><p>"Puas banget! Krim perawatan wajah paling mantul. Kandungan alaminya ramah banget di kulit, nggak bikin iritasi sama sekali. Pemakaian rutin sebulan udah kelihatan lebih awet muda!"</p></div>
+  </div>
+
+  <section id="order" class="block">
+    <h2>Isi Form Pemesanan</h2>
+    <p>Isi data di bawah ini, paket dikirim ke alamat Anda.</p>
+    <form class="card" id="orderForm" novalidate>
+      <p class="product-name" id="productName">Meora Natural Glow Balm</p>
+      <div class="price-line"><span class="price-now" id="unitPrice">Rp99.000</span></div>
+
+      <label for="qty">Jumlah</label>
+      <div class="qty">
+        <button type="button" data-step="-1" aria-label="Kurangi">−</button>
+        <input id="qty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric">
+        <button type="button" data-step="1" aria-label="Tambah">+</button>
+      </div>
+
+      <label for="customerName">Nama Lengkap</label>
+      <input id="customerName" name="customerName" autocomplete="name" required placeholder="Nama Anda">
+
+      <label for="customerPhone">No. WhatsApp</label>
+      <input id="customerPhone" name="customerPhone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="08xxxxxxxxxx">
+
+      <label for="province">Provinsi</label>
+      <select id="province" required><option value="">Memuat…</option></select>
+
+      <label for="city">Kota / Kabupaten</label>
+      <select id="city" required disabled><option value="">Pilih provinsi dulu</option></select>
+
+      <label for="subdistrict">Kecamatan</label>
+      <select id="subdistrict" required disabled><option value="">Pilih kota dulu</option></select>
+
+      <label for="postalCode">Kode Pos</label>
+      <select id="postalCode" disabled><option value="">Pilih kecamatan dulu</option></select>
+
+      <label for="address">Alamat Lengkap</label>
+      <textarea id="address" name="address" autocomplete="street-address" required placeholder="Nama jalan, nomor rumah, RT/RW, patokan"></textarea>
+
+      <label>Metode Pembayaran</label>
+      <div class="options" id="paymentOptions"><div class="hint">Memuat metode pembayaran…</div></div>
+
+      <label>Pengiriman</label>
+      <div class="options" id="shippingOptions"><div class="hint">Lengkapi alamat untuk melihat ongkir.</div></div>
+
+      <div class="summary" id="summary" hidden>
+        <div><span>Harga produk</span><span id="sumProduct">-</span></div>
+        <div><span>Ongkos kirim</span><span id="sumShipping">-</span></div>
+        <div id="rowOther" hidden><span id="sumOtherName">Biaya lain</span><span id="sumOther">-</span></div>
+        <div id="rowService" hidden><span>Biaya layanan</span><span id="sumService">-</span></div>
+        <div class="total"><span>Total</span><span id="sumTotal">-</span></div>
+      </div>
+
+      <div class="error" id="formError" role="alert" hidden></div>
+      <button class="btn submit" type="submit" id="submitBtn">BELI SEKARANG</button>
+    </form>
+  </section>
+
+  <footer><b>MEORA – Reseller Resmi</b>© 2026 Meora. Hak Cipta Dilindungi Undang-Undang.</footer>
+</div>
+
+<div class="sticky" id="sticky"><a class="ico" href="#order"><span>💬</span>Tanya CS</a><a class="ico" href="#toko"><span>🏪</span>Toko</a><a class="btn" href="#order">BELI SEKARANG (COD)</a></div>
+
+<script>
+(function () {
+  var rupiah = function (n) { return "Rp" + Math.round(Number(n) || 0).toLocaleString("id-ID"); };
+  var $ = function (id) { return document.getElementById(id); };
+
+  var state = { variant: null, payment: null, shipping: null, shippingList: [] };
+
+  // Hide the sticky CTA while the order form is on screen.
+  if ("IntersectionObserver" in window && $("sticky")) {
+    new IntersectionObserver(function (entries) {
+      $("sticky").classList.toggle("hide", entries[0].isIntersecting);
+    }).observe($("order"));
+  }
+
+  document.querySelectorAll(".qty button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var q = $("qty");
+      q.value = Math.min(20, Math.max(1, (parseInt(q.value, 10) || 1) + Number(b.dataset.step)));
+      onCartChange();
+    });
+  });
+  $("qty").addEventListener("change", onCartChange);
+
+  function showError(msg) {
+    var e = $("formError");
+    e.textContent = msg || "";
+    e.hidden = !msg;
+  }
+
+  function fillSelect(sel, list, placeholder, valueKey, labelKey) {
+    sel.innerHTML = "";
+    var o = document.createElement("option");
+    o.value = ""; o.textContent = placeholder; sel.appendChild(o);
+    list.forEach(function (it) {
+      var op = document.createElement("option");
+      op.value = it[valueKey]; op.textContent = it[labelKey];
+      sel.appendChild(op);
+    });
+    sel.disabled = false;
+  }
+
+  function qty() { return Math.max(1, parseInt($("qty").value, 10) || 1); }
+
+  function items() {
+    return [state.variant.isBundle
+      ? { type: "bundle", bundlePriceOptionUniqueId: state.variant.uniqueId, quantity: qty() }
+      : { type: "product", variantUniqueId: state.variant.uniqueId, quantity: qty() }];
+  }
+
+  function destination() {
+    return {
+      subdistrictId: Number($("subdistrict").value) || undefined,
+      postalCode: $("postalCode").value || undefined
+    };
+  }
+
+  function renderPayments(options) {
+    var box = $("paymentOptions");
+    box.innerHTML = "";
+    options.forEach(function (p, i) {
+      var l = document.createElement("label");
+      l.className = "opt";
+      l.innerHTML = '<input type="radio" name="payment"><span class="grow"></span>';
+      l.querySelector(".grow").textContent = p.display;
+      if (p.logoUrl) { var img = document.createElement("img"); img.src = p.logoUrl; img.alt = ""; l.appendChild(img); }
+      var r = l.querySelector("input");
+      r.value = p.value;
+      if (i === 0) { r.checked = true; state.payment = p.value; }
+      r.addEventListener("change", function () { state.payment = p.value; loadShipping(); });
+      box.appendChild(l);
+    });
+  }
+
+  function renderShipping(list) {
+    var box = $("shippingOptions");
+    box.innerHTML = "";
+    state.shippingList = list;
+    state.shipping = null;
+    if (!list.length) {
+      box.innerHTML = '<div class="hint">Tidak ada layanan pengiriman untuk alamat/metode ini.</div>';
+      updateSummary();
+      return;
+    }
+    list.forEach(function (s, i) {
+      var l = document.createElement("label");
+      l.className = "opt";
+      l.innerHTML = '<input type="radio" name="shipping"><span class="grow"></span><strong></strong>';
+      l.querySelector(".grow").textContent = (s.courierCode || "").toUpperCase() + " " + (s.name || "") + (s.etd ? " (" + s.etd + " hari)" : "");
+      l.querySelector("strong").textContent = rupiah(s.cost);
+      var r = l.querySelector("input");
+      if (i === 0) { r.checked = true; state.shipping = s; }
+      r.addEventListener("change", function () { state.shipping = s; updateSummary(); });
+      box.appendChild(l);
+    });
+    updateSummary();
+  }
+
+  var shippingSeq = 0;
+  function loadShipping() {
+    if (!window.Scalev || !state.variant || !state.payment) return;
+    var d = destination();
+    if (!d.subdistrictId) return;
+    var seq = ++shippingSeq;
+    $("shippingOptions").innerHTML = '<div class="hint">Menghitung ongkir…</div>';
+    Scalev.checkout.shippingOptions({ paymentMethod: state.payment, destination: d, items: items() })
+      .then(function (list) { if (seq === shippingSeq) renderShipping(list || []); })
+      .catch(function (err) {
+        if (seq !== shippingSeq) return;
+        $("shippingOptions").innerHTML = '<div class="hint">Gagal memuat ongkir. Coba lagi.</div>';
+        console.warn(err);
+      });
+  }
+
+  var summarySeq = 0;
+  function updateSummary() {
+    if (!state.shipping) { $("summary").hidden = true; return; }
+    var seq = ++summarySeq;
+    Scalev.checkout.estimateSummary({
+      destination: destination(), items: items(), paymentMethod: state.payment, shipping: state.shipping
+    }).then(function (s) {
+      if (seq !== summarySeq) return;
+      $("sumProduct").textContent = rupiah(s.productPrice);
+      $("sumShipping").textContent = rupiah(s.shippingCost);
+      $("rowOther").hidden = !Number(s.otherIncome);
+      $("sumOtherName").textContent = s.otherIncomeName || "Biaya lain";
+      $("sumOther").textContent = rupiah(s.otherIncome);
+      $("rowService").hidden = !Number(s.serviceFee);
+      $("sumService").textContent = rupiah(s.serviceFee);
+      $("sumTotal").textContent = rupiah(s.grossRevenue);
+      $("summary").hidden = false;
+    }).catch(function (err) { console.warn(err); });
+  }
+
+  function onCartChange() {
+    if (state.variant && $("sticky") && $("sticky").hasAttribute("data-price-label")) {
+      $("sticky").querySelector(".btn").textContent = "Pesan Sekarang – " + rupiah(state.variant.price);
+    }
+    loadShipping();
+  }
+
+  function init() {
+    var S = window.Scalev;
+    if (!S) { showError("Form pemesanan sedang dimuat. Silakan muat ulang halaman."); return; }
+    var data = S.data.get() || {};
+    var store = data.store;
+    // The store sells either a product variant or a bundle price option; use whichever is attached.
+    var product = store && store.products && store.products[0];
+    var bundle = store && store.bundlePriceOptions && store.bundlePriceOptions[0];
+    if (product && product.variants && product.variants[0]) {
+      state.variant = product.variants[0];
+    } else if (bundle) {
+      state.variant = { isBundle: true, uniqueId: bundle.uniqueId, price: bundle.price };
+    }
+    if (!state.variant) { showError("Produk belum tersedia. Hubungi admin."); return; }
+
+    $("unitPrice").textContent = rupiah(state.variant.price);
+    onCartChange();
+
+    var payments = store.paymentMethodOptions || [];
+    renderPayments(payments);
+
+    S.location.provinces().then(function (list) {
+      fillSelect($("province"), list, "Pilih provinsi", "id", "name");
+    });
+    $("province").addEventListener("change", function () {
+      $("city").disabled = $("subdistrict").disabled = $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.cities(this.value).then(function (list) {
+        fillSelect($("city"), list, "Pilih kota/kabupaten", "id", "name");
+      });
+    });
+    $("city").addEventListener("change", function () {
+      $("subdistrict").disabled = $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.subdistricts(this.value).then(function (list) {
+        fillSelect($("subdistrict"), list, "Pilih kecamatan", "id", "name");
+      });
+    });
+    $("subdistrict").addEventListener("change", function () {
+      $("postalCode").disabled = true;
+      if (!this.value) return;
+      S.location.postalCodes(this.value).then(function (list) {
+        fillSelect($("postalCode"), list, "Pilih kode pos", "postalCode", "postalCode");
+        if (list.length === 1) $("postalCode").value = list[0].postalCode;
+        loadShipping();
+      });
+    });
+    $("postalCode").addEventListener("change", loadShipping);
+
+    S.prefill.get().then(function (p) {
+      if (!p) return;
+      if (p.customer) {
+        if (p.customer.name) $("customerName").value = p.customer.name;
+        if (p.customer.phone) $("customerPhone").value = p.customer.phone;
+      }
+      if (p.destination && p.destination.address) $("address").value = p.destination.address;
+    }).catch(function () {});
+
+    var submitting = false;
+    $("orderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (submitting) return;
+      showError("");
+      var name = $("customerName").value.trim();
+      var phone = $("customerPhone").value.replace(/[^0-9+]/g, "");
+      var address = $("address").value.trim();
+      if (!name) return showError("Nama wajib diisi.");
+      if (phone.length < 9) return showError("Nomor WhatsApp belum benar.");
+      if (!$("subdistrict").value) return showError("Pilih provinsi, kota, dan kecamatan.");
+      if (!address) return showError("Alamat lengkap wajib diisi.");
+      if (!state.payment) return showError("Pilih metode pembayaran.");
+      if (!state.shipping) return showError("Pilih layanan pengiriman.");
+
+      submitting = true;
+      var btn = $("submitBtn");
+      btn.disabled = true; btn.textContent = "Memproses…";
+
+      var payload = {
+        customer: { name: name, phone: phone },
+        destination: Object.assign({ address: address }, destination()),
+        items: items(),
+        paymentMethod: state.payment,
+        shipping: state.shipping
+      };
+
+      S.prefill.save({ customer: payload.customer, destination: payload.destination }, { source: "checkout_form" }).catch(function () {});
+
+      S.checkout.createOrder(payload).then(function (order) {
+        var target = order && typeof order.redirectUrl === "string" ? order.redirectUrl.trim() : "";
+        if (target) {
+          if (window.self !== window.top) window.parent.postMessage(target, "*");
+          else window.location.assign(target);
+          return;
+        }
+        btn.textContent = "Pesanan diterima ✔";
+        showError("");
+        var f = $("formError");
+        f.hidden = false; f.style.color = "var(--green)";
+        f.textContent = "Pesanan berhasil dibuat. Admin kami akan menghubungi Anda via WhatsApp.";
+        if (order && order.publicOrderUrl) {
+          var a = document.createElement("a"); a.href = order.publicOrderUrl; a.textContent = " Lihat pesanan";
+          f.appendChild(a);
+        }
+      }).catch(function (err) {
+        submitting = false;
+        btn.disabled = false; btn.textContent = "BELI SEKARANG";
+        showError((err && err.message) || "Pesanan gagal dibuat. Silakan coba lagi.");
+      });
+    });
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+<script>
+(function () {
+  var slides = document.getElementById("slides"), count = document.getElementById("count");
+  var thumbs = document.querySelectorAll("#thumbs button"), n = thumbs.length;
+  function current() { return Math.round(slides.scrollLeft / slides.clientWidth); }
+  slides.addEventListener("scroll", function () {
+    var i = current();
+    count.textContent = (i + 1) + "/" + n;
+    thumbs.forEach(function (t, j) { t.classList.toggle("on", i === j); });
+  }, { passive: true });
+  thumbs.forEach(function (t) {
+    t.addEventListener("click", function () { slides.scrollTo({ left: Number(t.dataset.i) * slides.clientWidth, behavior: "smooth" }); });
+  });
+})();
+</script>
+</body>
+</html>
