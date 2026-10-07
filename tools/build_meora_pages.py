@@ -301,6 +301,62 @@ __SCRIPT__
 """
 
 
+# Exact replicas of the reference pages (kept separate so the edited versions stay untouched).
+FA1_EXACT = (FA1
+    .replace("""    <p class="lead">Rahasia kecantikan eksotis dengan ekstrak Buah Merah murni untuk kulit sehat, lembap, dan bercahaya.</p>
+""", """    <p class="lead">Rahasia kecantikan eksotis dengan ekstrak Buah Merah murni untuk kulit sehat, lembap, dan bercahaya.</p>
+    <div class="viewers"><b>125</b> orang sedang melihat halaman ini</div>
+""")
+    .replace("""      <div><b>Buah Merah</b><span>Papua Asli</span></div>
+      <div><b>Tekstur Balm</b><span>Lembut di Kulit</span></div>
+      <div><b>100%</b><span>Bahan Natural</span></div>""", """      <div><b>4.9<small>★</small></b><span>Rating Kepuasan</span></div>
+      <div><b>10k+</b><span>Wanita Terbantu</span></div>
+      <div><b>100%</b><span>Bahan Natural</span></div>""")
+    .replace("""      <span class="chip">DISKON 50% &amp; BISA COD</span>
+""", """      <span class="chip">DISKON 50% &amp; BISA COD</span>
+      <div class="timer"><small>PROMO BERAKHIR DALAM:</small><div>00 <i>:</i> 15 <i>:</i> 00</div></div>
+      <div class="stock">⚠️ Perhatian: Stok promo hari ini tersisa <u>12 jar</u> saja!</div>
+""")
+    .replace("  .card { border-color: var(--border); }", """  .card { border-color: var(--border); }
+  .viewers { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: 6px 18px; font-size: 13px; color: #5a4a44; margin: 0 0 22px; background: #fff; }
+  .facts small { color: var(--gold); font-size: 12px; }
+  .timer { margin: 16px 0 10px; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+  .timer small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .6px; color: #6a5a52; }
+  .timer div { font-size: 16px; letter-spacing: 2px; color: #9a9a9a; margin-top: 4px; }
+  .timer i { color: var(--red); font-style: normal; font-weight: 700; }
+  .stock { font-size: 13px; font-weight: 700; color: #d9826f; border-radius: 8px; padding: 8px; box-shadow: 0 1px 6px rgba(0,0,0,.06); }"""))
+
+M2_EXACT = (M2
+    .replace("""    <img class="full" src="img/07-isi-form.jpg" alt="Isi form di bawah ini untuk pemesanan" loading="lazy" style="margin-bottom:12px">
+""", """    <img class="full" src="img/07-isi-form.jpg" alt="Isi form di bawah ini untuk pemesanan" loading="lazy" style="margin-bottom:12px">
+    <p style="font-weight:700;margin:8px 0 6px">Pilihan Produk</p>
+    <label class="opt" style="margin-bottom:14px"><input type="radio" checked> Promo 99rb Dapat 1PCS</label>
+""")
+    .replace("""<div class="sticky" id="sticky"><a class="btn" href="#order">Beli Sekarang</a></div>
+""", ""))
+
+# The exact replicas keep their own button labels and may have no sticky bar.
+EXACT_SCRIPT_PATCHES = [
+    ("""  if ("IntersectionObserver" in window) {""", """  if ("IntersectionObserver" in window && $("sticky")) {"""),
+    ("""    if (state.variant) {
+      $("sticky")""", """    if (state.variant && $("sticky") && $("sticky").hasAttribute("data-price-label")) {
+      $("sticky")"""),
+]
+
+
+def render_exact(template, submit_label=None, address_placeholder=None):
+    html = render(template)
+    for old, new in EXACT_SCRIPT_PATCHES:
+        assert html.count(old) == 1, old
+        html = html.replace(old, new)
+    if submit_label:
+        html = html.replace('id="submitBtn">Beli Sekarang<', f'id="submitBtn">{submit_label}<')
+        html = html.replace('btn.textContent = "Beli Sekarang";', f'btn.textContent = "{submit_label}";')
+    if address_placeholder:
+        html = html.replace('placeholder="Nama jalan, nomor rumah, RT/RW, patokan"', f'placeholder="{address_placeholder}"')
+    return html
+
+
 def render(template):
     return (template.replace("__CHECKOUT_CSS__", CHECKOUT_CSS.rstrip("\n"))
             .replace("__FORM__", FORM)
@@ -308,7 +364,12 @@ def render(template):
 
 
 def with_cdn(html, folder, sha):
-    return re.sub(r'src="img/', f'src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@{sha}/{folder}/img/', html)
+    return re.sub(r'src="(?:\.\./[\w-]+/)?img/', lambda m: f'src="https://cdn.jsdelivr.net/gh/akbarseft86/dropship-baru@{sha}/{img_folder(m.group(0), folder)}/img/', html)
+
+
+def img_folder(match, folder):
+    m = re.match(r'src="\.\./([\w-]+)/img/', match)
+    return m.group(1) if m else folder
 
 
 if __name__ == "__main__":
@@ -316,6 +377,17 @@ if __name__ == "__main__":
     sha = sys.argv[1] if len(sys.argv) > 1 else None
     for folder, tpl in (("meora-fa1", FA1), ("meora-2", M2)):
         html = render(tpl)
+        (ROOT / folder / "index.html").write_text(html)
+        if sha:
+            (ROOT / folder / "index.scalev.html").write_text(with_cdn(html, folder, sha))
+    exact = (
+        ("meora-fa1-persis", "meora-fa1", render_exact(FA1_EXACT, "Selesaikan Pesanan",
+            "Alamat Lengkap Anda (Kelurahan, Nama Jln/Gang, RT/RW, No Rumah, Patokan Lain)")),
+        ("meora-2-persis", "meora-2", render_exact(M2_EXACT, None, "Alamat Lengkap Anda")),
+    )
+    for folder, img_src, html in exact:
+        html = html.replace('src="img/', f'src="../{img_src}/img/')
+        (ROOT / folder).mkdir(exist_ok=True)
         (ROOT / folder / "index.html").write_text(html)
         if sha:
             (ROOT / folder / "index.scalev.html").write_text(with_cdn(html, folder, sha))
